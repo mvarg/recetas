@@ -1,0 +1,8 @@
+recipe_homepage:
+    path:     /receta
+    defaults: { _controller: RecipeBundle:Default:index }
+
+
+recipe_show:
+    path:      /receta/{slug}
+    defaults:  { _controller: RecipeBundle:Default:show }
