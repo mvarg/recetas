@@ -1,0 +1,106 @@
+<?php
+
+namespace RecipeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Recipes
+ *
+ * @ORM\Table(name="recipes", indexes={@ORM\Index(name="fk_recetas_usuario1_idx", columns={"usuario_id"})})
+ * @ORM\Entity
+ */
+class Recipes
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=45, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=45, nullable=false)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="difficulty", type="string", length=45, nullable=false)
+     */
+    private $difficulty;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="racion", type="string", length=45, nullable=false)
+     */
+    private $racion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="duracion", type="string", length=45, nullable=false)
+     */
+    private $duracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     */
+    private $updatedAt;
+
+    /**
+     * @var \Users
+     *
+     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * })
+     */
+    private $usuario;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Ingredients", inversedBy="recipes")
+     * @ORM\JoinTable(name="recipes_has_ingredients",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="recipes_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="ingredients_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $ingredients;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

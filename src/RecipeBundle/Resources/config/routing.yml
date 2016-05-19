@@ -1,8 +1,8 @@
-recipe_homepage:
+recipe_list:
     path:     /receta
-    defaults: { _controller: RecipeBundle:Default:index }
+    defaults: { _controller: RecipeBundle:Recipe:getAll }
 
 
-recipe_show:
+recipe_detail:
     path:      /receta/{slug}
-    defaults:  { _controller: RecipeBundle:Default:show }
+    defaults:  {  _controller: RecipeBundle:Recipe:getBySlug }

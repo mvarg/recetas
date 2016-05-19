@@ -105,15 +105,30 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // user_login
+        if ($pathinfo === '/login') {
+            return array (  '_controller' => 'UserBundle\\Controller\\UserController::loginAction',  '_route' => 'user_login',);
+        }
+
+        // user_register
+        if ($pathinfo === '/register') {
+            return array (  '_controller' => 'UserBundle\\Controller\\UserController::registerAction',  '_route' => 'user_register',);
+        }
+
+        // user_contact
+        if ($pathinfo === '/contact') {
+            return array (  '_controller' => 'UserBundle\\Controller\\UserController::contactAction',  '_route' => 'user_contact',);
+        }
+
         if (0 === strpos($pathinfo, '/receta')) {
-            // recipe_homepage
+            // recipe_list
             if ($pathinfo === '/receta') {
-                return array (  '_controller' => 'RecipeBundle\\Controller\\DefaultController::indexAction',  '_route' => 'recipe_homepage',);
+                return array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getAllAction',  '_route' => 'recipe_list',);
             }
 
-            // recipe_show
+            // recipe_detail
             if (preg_match('#^/receta/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_show')), array (  '_controller' => 'RecipeBundle\\Controller\\DefaultController::showAction',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_detail')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getBySlugAction',));
             }
 
         }

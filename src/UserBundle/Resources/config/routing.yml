@@ -1,0 +1,13 @@
+user_login:
+    path:     /login
+    defaults: { _controller: UserBundle:User:login }
+
+
+user_register:
+    path:      /register
+    defaults:  {  _controller: UserBundle:User:register }
+
+
+user_contact:
+    path:      /contact
+    defaults:  {  _controller: UserBundle:User:contact }

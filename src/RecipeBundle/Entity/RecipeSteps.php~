@@ -1,0 +1,49 @@
+<?php
+
+namespace RecipeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * RecipeSteps
+ *
+ * @ORM\Table(name="recipe_steps", indexes={@ORM\Index(name="fk_recipe_steps_recipes1_idx", columns={"recipes_id"})})
+ * @ORM\Entity
+ */
+class RecipeSteps
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="instruction", type="text", length=65535, nullable=false)
+     */
+    private $instruction;
+
+    /**
+     * @var \Recipes
+     *
+     * @ORM\ManyToOne(targetEntity="Recipes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="recipes_id", referencedColumnName="id")
+     * })
+     */
+    private $recipes;
+
+
+}
