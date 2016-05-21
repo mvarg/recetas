@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Name</source>
+                <target>Nombre</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Created at</source>
+                <target>Creación</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Updated at</source>
+                <target>Modificación</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Actions</source>
+                <target>Acciones</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>New User</source>
+                <target>Crear usuario</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>User section</source>
+                <target>Sección de usuarios</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>View</source>
+                <target>Ver</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Edit</source>
+                <target>Editar</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Delete</source>
+                <target>Eliminar</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

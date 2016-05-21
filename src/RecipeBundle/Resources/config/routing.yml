@@ -1,30 +1,38 @@
 recipe_list:
-    path:     /recipe
-    defaults: { _controller: RecipeBundle:Recipe:getAll }
+    path:     /{_locale}/recipe
+    defaults: { _controller: RecipeBundle:Recipe:getAll , _locale: en }
+    requirements:
+        _locale: en|es
 
 recipe_add:
-    path:      /recipe/add
-    defaults:  {  _controller: RecipeBundle:Recipe:add }
+    path:      /{_locale}/recipeadd
+    defaults:  {  _controller: RecipeBundle:Recipe:add , _locale: en }
+    requirements:
+        _locale: en|es
 
 recipe_mod:
-    path:      /recipe/mod/{id}
-    defaults:  {  _controller: RecipeBundle:Recipe:mod }
+    path:      /{_locale}/recipemod/{id}
+    defaults:  {  _controller: RecipeBundle:Recipe:mod , _locale: en }
     requirements:
         id: \d+
+        _locale: en|es
 
 recipe_del:
-    path:      /recipe/del/{id}
-    defaults:  {  _controller: RecipeBundle:Recipe:del }
+    path:      /{_locale}/recipedel/{id}
+    defaults:  {  _controller: RecipeBundle:Recipe:del , _locale: en }
     requirements:
         id: \d+
+        _locale: en|es
 
 recipe_get:
-    path:      /recipe/{id}
-    defaults:  {  _controller: RecipeBundle:Recipe:getById }
+    path:      /{_locale}/recipe{id}
+    defaults:  {  _controller: RecipeBundle:Recipe:getById , _locale: en }
     requirements:
         id: \d+
-
+        _locale: en|es
 
 recipe_get_slug:
-    path:      /recipe-slug/{slug}
-    defaults:  {  _controller: RecipeBundle:Recipe:getBySlug }
+    path:      /{_locale}/recipe-slug/{slug}
+    defaults:  {  _controller: RecipeBundle:Recipe:getBySlug , _locale: en }
+    requirements:
+        _locale: en|es

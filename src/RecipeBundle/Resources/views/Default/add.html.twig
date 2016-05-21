@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     {{ form_label(form.description) }}
-                    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder' : 'Your first name'}}) }}
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder' : "Introduce your description here" | trans }}) }}
                     <span class="text-danger">{{ form_errors(form.description) }}</span>
                 </div>
 

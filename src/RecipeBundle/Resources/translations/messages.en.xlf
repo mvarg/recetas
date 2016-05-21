@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Recipe section</source>
+                <target>Recipe section</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Add recipe</source>
+                <target>Add recipe</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Difficulty</source>
+                <target>Difficulty</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Rate</source>
+                <target>Rate</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Time</source>
+                <target>Time</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Author</source>
+                <target>Author</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Actions</source>
+                <target>Actions</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>View</source>
+                <target>View</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>Delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Recipe</source>
+                <target>Recipe</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Add new recipe</source>
+                <target>Add new recipe</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>Recipe name</source>
+                <target>Recipe name</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Your description here</source>
+                <target>Your description here</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>Difficulty</source>
+                <target>Difficulty</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Select</source>
+                <target>Select</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>Portion</source>
+                <target>Portion</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>Rate</source>
+                <target>Rate</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>Time</source>
+                <target>Time</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>Author</source>
+                <target>Author</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>Save recipe</source>
+                <target>Save recipe</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

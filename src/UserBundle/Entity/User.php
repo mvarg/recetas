@@ -30,7 +30,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=16, nullable=false)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Debes rellenar este campo")
      */
     private $username;
 

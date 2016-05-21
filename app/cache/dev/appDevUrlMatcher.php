@@ -105,89 +105,80 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/user')) {
-            // user_list
-            if ($pathinfo === '/user') {
-                return array (  '_controller' => 'UserBundle\\Controller\\UserController::getAllAction',  '_route' => 'user_list',);
-            }
-
-            // user_add
-            if ($pathinfo === '/user/add') {
-                return array (  '_controller' => 'UserBundle\\Controller\\UserController::addAction',  '_route' => 'user_add',);
-            }
-
-            if (0 === strpos($pathinfo, '/user/inset')) {
-                // user_insert
-                if ($pathinfo === '/user/inset') {
-                    if ($this->context->getMethod() != 'POST') {
-                        $allow[] = 'POST';
-                        goto not_user_insert;
-                    }
-
-                    return array (  '_controller' => 'UserBundle\\Controller\\UserController::insertAction',  '_route' => 'user_insert',);
-                }
-                not_user_insert:
-
-                // user_insert_redirect
-                if ($pathinfo === '/user/inset') {
-                    return array (  '_controller' => 'UserBundle\\Controller\\UserController::addAction',  'path' => 'user/add',  'permanent' => true,  '_route' => 'user_insert_redirect',);
-                }
-
-            }
-
-            // user_mod
-            if (0 === strpos($pathinfo, '/user/mod') && preg_match('#^/user/mod/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_mod')), array (  '_controller' => 'UserBundle\\Controller\\UserController::modAction',));
-            }
-
-            // user_del
-            if (0 === strpos($pathinfo, '/user/del') && preg_match('#^/user/del/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_del')), array (  '_controller' => 'UserBundle\\Controller\\UserController::delAction',));
-            }
-
-            // user_get
-            if (preg_match('#^/user/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_get')), array (  '_controller' => 'UserBundle\\Controller\\UserController::getByIdAction',));
-            }
-
-            // recipe_get_recipes
-            if (0 === strpos($pathinfo, '/user/recipes') && preg_match('#^/user/recipes/(?P<userId>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_get_recipes')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getByUserIdAction',));
-            }
-
+        // user_list
+        if (preg_match('#^/(?P<_locale>en|es)/user$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_list')), array (  '_controller' => 'UserBundle\\Controller\\UserController::getAllAction',  '_locale' => 'en',));
         }
 
-        if (0 === strpos($pathinfo, '/recipe')) {
-            // recipe_list
-            if ($pathinfo === '/recipe') {
-                return array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getAllAction',  '_route' => 'recipe_list',);
+        // user_add
+        if (preg_match('#^/(?P<_locale>en|es)/user/add$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_add')), array (  '_controller' => 'UserBundle\\Controller\\UserController::addAction',  '_locale' => 'en',));
+        }
+
+        // user_insert
+        if (preg_match('#^/(?P<_locale>en|es)/user/inset$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_user_insert;
             }
 
-            // recipe_add
-            if ($pathinfo === '/recipe/add') {
-                return array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::addAction',  '_route' => 'recipe_add',);
-            }
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_insert')), array (  '_controller' => 'UserBundle\\Controller\\UserController::insertAction',  '_locale' => 'en',));
+        }
+        not_user_insert:
 
-            // recipe_mod
-            if (0 === strpos($pathinfo, '/recipe/mod') && preg_match('#^/recipe/mod/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_mod')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::modAction',));
-            }
+        // user_insert_redirect
+        if (preg_match('#^/(?P<_locale>en|es)/user/inset$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_insert_redirect')), array (  '_controller' => 'UserBundle:User:add, _locale: en',  'path' => 'user/add',  'permanent' => true,));
+        }
 
-            // recipe_del
-            if (0 === strpos($pathinfo, '/recipe/del') && preg_match('#^/recipe/del/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_del')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::delAction',));
-            }
+        // user_mod
+        if (preg_match('#^/(?P<_locale>en|es)/user/mod/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_mod')), array (  '_controller' => 'UserBundle\\Controller\\UserController::modAction',  '_locale' => 'en',));
+        }
 
-            // recipe_get
-            if (preg_match('#^/recipe/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_get')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getByIdAction',));
-            }
+        // user_del
+        if (preg_match('#^/(?P<_locale>en|es)/user/del/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_del')), array (  '_controller' => 'UserBundle\\Controller\\UserController::delAction',  '_locale' => 'en',));
+        }
 
-            // recipe_get_slug
-            if (0 === strpos($pathinfo, '/recipe-slug') && preg_match('#^/recipe\\-slug/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_get_slug')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getBySlugAction',));
-            }
+        // user_get
+        if (preg_match('#^/(?P<_locale>en|es)/user/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_get')), array (  '_controller' => 'UserBundle\\Controller\\UserController::getByIdAction',  '_locale' => 'en',));
+        }
 
+        // recipe_get_recipes
+        if (preg_match('#^/(?P<_locale>en|es)/user/recipes/(?P<userId>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_get_recipes')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getByUserIdAction',  '_locale' => 'en',));
+        }
+
+        // recipe_list
+        if (preg_match('#^/(?P<_locale>en|es)/recipe$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_list')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getAllAction',  '_locale' => 'en',));
+        }
+
+        // recipe_add
+        if (preg_match('#^/(?P<_locale>en|es)/recipeadd$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_add')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::addAction',  '_locale' => 'en',));
+        }
+
+        // recipe_mod
+        if (preg_match('#^/(?P<_locale>en|es)/recipemod/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_mod')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::modAction',  '_locale' => 'en',));
+        }
+
+        // recipe_del
+        if (preg_match('#^/(?P<_locale>en|es)/recipedel/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_del')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::delAction',  '_locale' => 'en',));
+        }
+
+        // recipe_get
+        if (preg_match('#^/(?P<_locale>en|es)/recipe(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_get')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getByIdAction',  '_locale' => 'en',));
+        }
+
+        // recipe_get_slug
+        if (preg_match('#^/(?P<_locale>en|es)/recipe\\-slug/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_get_slug')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getBySlugAction',  '_locale' => 'en',));
         }
 
         // homepage
