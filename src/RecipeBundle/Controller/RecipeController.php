@@ -2,6 +2,8 @@
 
 namespace RecipeBundle\Controller;
 
+use RecipeBundle\Entity\Recipe;
+use RecipeBundle\Form\RecipeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -9,20 +11,36 @@ class RecipeController extends Controller
 {
     public function getAllAction()
     {
-        $mngr    = $this->getDoctrine()->getManager();
-        $recipes = $mngr->getRepository('RecipeBundle:Recipe')->findAll();
-        $resp    = "<h1>Listado de recetas</h1>";
+        $recipes = $this->getDoctrine()
+                        ->getRepository('RecipeBundle:Recipe')
+                        ->findAll();
 
-        foreach ($recipes as $recipe) {
-            $resp .= "<div>" . $recipe->getName() . "</div>";
-        }
-        return new Response($resp);
+        return $this->render('RecipeBundle:Default:list.html.twig', ['recipes' => $recipes]);
+    }
 
-//        return $this->render('RecipeBundle:Default:index.html.twig');
+    public function getByIdAction($id)
+    {
+        $recipe = $this->getDoctrine()->getRepository("RecipeBundle:Recipe")->findOneById($id);
+
+        return new Response($recipe->getName());
     }
 
     public function getBySlugAction($slug)
     {
-        return new Response("Recuperar la receta <b>" . $slug . "</b>");
+        $recipe = $this->getDoctrine()->getRepository("RecipeBundle:Recipe")->findOneBySlug($slug);
+
+        return new Response($recipe->getName());
+    }
+
+    public function addAction()
+    {
+        $recipe     = new Recipe();
+        $recipeForm = new RecipeType();
+        $form       = $this->createForm($recipeForm, $recipe, [
+                          'action' => $this->generateUrl('recipe_add'),
+                          'method' => 'POST'
+                      ]);
+
+        return $this->render('RecipeBundle:Default:add.html.twig', ['form' => $form->createView()]);
     }
 }

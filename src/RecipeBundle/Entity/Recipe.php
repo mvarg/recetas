@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Recipe
  *
- * @ORM\Table(name="recipe", indexes={@ORM\Index(name="fk_recetas_usuario1_idx", columns={"usuario_id"})})
+ * @ORM\Table(name="recipe", indexes={@ORM\Index(name="fk_recetas_usuario1_idx", columns={"user_id"})})
  * @ORM\Entity
  */
 class Recipe
@@ -31,30 +31,44 @@ class Recipe
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=45, nullable=false)
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
     private $description;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="difficulty", type="string", length=45, nullable=false)
+     * @ORM\Column(name="difficulty", type="integer", nullable=false)
      */
     private $difficulty;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="racion", type="string", length=45, nullable=false)
+     * @ORM\Column(name="portion", type="integer", nullable=false)
      */
-    private $racion;
+    private $portion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="rate", type="integer", nullable=false)
+     */
+    private $rate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="duration", type="integer", nullable=false)
+     */
+    private $duration;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="duracion", type="string", length=45, nullable=false)
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
-    private $duracion;
+    private $slug;
 
     /**
      * @var \DateTime
@@ -71,14 +85,29 @@ class Recipe
     private $updatedAt;
 
     /**
-     * @var \UserBundle\Entity\User
+     * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
      */
-    private $usuario;
+    private $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="recipe")
+     * @ORM\JoinTable(name="recipe_has_category",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $category;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -100,6 +129,7 @@ class Recipe
      */
     public function __construct()
     {
+        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ingredient = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -163,7 +193,7 @@ class Recipe
     /**
      * Set difficulty
      *
-     * @param string $difficulty
+     * @param integer $difficulty
      * @return Recipe
      */
     public function setDifficulty($difficulty)
@@ -176,7 +206,7 @@ class Recipe
     /**
      * Get difficulty
      *
-     * @return string 
+     * @return integer 
      */
     public function getDifficulty()
     {
@@ -184,49 +214,95 @@ class Recipe
     }
 
     /**
-     * Set racion
+     * Set portion
      *
-     * @param string $racion
+     * @param integer $portion
      * @return Recipe
      */
-    public function setRacion($racion)
+    public function setPortion($portion)
     {
-        $this->racion = $racion;
+        $this->portion = $portion;
 
         return $this;
     }
 
     /**
-     * Get racion
+     * Get portion
      *
-     * @return string 
+     * @return integer 
      */
-    public function getRacion()
+    public function getPortion()
     {
-        return $this->racion;
+        return $this->portion;
     }
 
     /**
-     * Set duracion
+     * Set rate
      *
-     * @param string $duracion
+     * @param integer $rate
      * @return Recipe
      */
-    public function setDuracion($duracion)
+    public function setRate($rate)
     {
-        $this->duracion = $duracion;
+        $this->rate = $rate;
 
         return $this;
     }
 
     /**
-     * Get duracion
+     * Get rate
+     *
+     * @return integer 
+     */
+    public function getRate()
+    {
+        return $this->rate;
+    }
+
+    /**
+     * Set duration
+     *
+     * @param integer $duration
+     * @return Recipe
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * Get duration
+     *
+     * @return integer 
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Recipe
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
      *
      * @return string 
      */
-    public function getDuracion()
+    public function getSlug()
     {
-        return $this->duracion;
+        return $this->slug;
     }
 
     /**
@@ -276,26 +352,59 @@ class Recipe
     }
 
     /**
-     * Set usuario
+     * Set user
      *
-     * @param \UserBundle\Entity\User $usuario
+     * @param \UserBundle\Entity\User $user
      * @return Recipe
      */
-    public function setUsuario(\UserBundle\Entity\User $usuario = null)
+    public function setUser($user = null)
     {
-        $this->usuario = $usuario;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get usuario
+     * Get user
      *
-     * @return \UserBundle\Entity\User 
+     * @return \UserBundle\Entity\User
      */
-    public function getUsuario()
+    public function getUser()
     {
-        return $this->usuario;
+        return $this->user;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \RecipeBundle\Entity\Category $category
+     * @return Recipe
+     */
+    public function addCategory(\RecipeBundle\Entity\Category $category)
+    {
+        $this->category[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \RecipeBundle\Entity\Category $category
+     */
+    public function removeCategory(\RecipeBundle\Entity\Category $category)
+    {
+        $this->category->removeElement($category);
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     /**

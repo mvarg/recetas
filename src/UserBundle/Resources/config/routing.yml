@@ -1,13 +1,37 @@
-user_login:
-    path:     /login
-    defaults: { _controller: UserBundle:User:login }
+user_list:
+    path:     /user
+    defaults: { _controller: UserBundle:User:getAll }
 
+user_add:
+    path:      /user/add
+    defaults:  {  _controller: UserBundle:User:add }
 
-user_register:
-    path:      /register
-    defaults:  {  _controller: UserBundle:User:register }
+user_insert:
+    path:      /user/inset
+    defaults:  {  _controller: UserBundle:User:insert }
+    methods: POST
 
+user_insert_redirect:
+    path:      /user/inset
+    defaults:
+        _controller: UserBundle:User:add
+        path: user/add
+        permanent: true
 
-user_contact:
-    path:      /contact
-    defaults:  {  _controller: UserBundle:User:contact }
+user_mod:
+    path:      /user/mod/{id}
+    defaults:  {  _controller: UserBundle:User:mod }
+    requirements:
+        id: \d+
+
+user_del:
+    path:      /user/del/{id}
+    defaults:  {  _controller: UserBundle:User:del }
+    requirements:
+        id: \d+
+
+user_get:
+    path:      /user/{id}
+    defaults:  {  _controller: UserBundle:User:getById }
+    requirements:
+        id: \d+

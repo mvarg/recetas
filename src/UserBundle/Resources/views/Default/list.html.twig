@@ -1,0 +1,44 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="page-header">
+                    <h1>Usuarios<br>
+                        <small>Sección de Usuarios</small>
+                        <a href="{{ path('user_add') }}" class="btn btn-sm btn-success pull-right">Añadir usuario</a>
+                    </h1>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Fecha de creación</th>
+                            <th>Fecha de modificación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users  %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.createdAt|date('d-m-Y H:i')}}</td>
+                                <td>{{ user.updatedAt|date('d-m-Y H:i')}}</td>
+                                <td>
+                                    <a href="{{ path('user_get', {id: user.id}) }}" class="btn btn-sm btn-info">view</a>
+                                    <a href="{{ path('user_mod', {id: user.id}) }}" class="btn btn-sm btn-primary">edit</a>
+                                    <a href="{{ path('user_del', {id: user.id}) }}" class="btn btn-sm btn-danger">delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

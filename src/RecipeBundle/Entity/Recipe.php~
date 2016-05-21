@@ -31,30 +31,44 @@ class Recipe
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=45, nullable=false)
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
     private $description;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="difficulty", type="string", length=45, nullable=false)
+     * @ORM\Column(name="difficulty", type="integer", nullable=false)
      */
     private $difficulty;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="racion", type="string", length=45, nullable=false)
+     * @ORM\Column(name="portion", type="integer", nullable=false)
      */
-    private $racion;
+    private $portion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="rate", type="integer", nullable=false)
+     */
+    private $rate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="duration", type="integer", nullable=false)
+     */
+    private $duration;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="duracion", type="string", length=45, nullable=false)
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
-    private $duracion;
+    private $slug;
 
     /**
      * @var \DateTime
@@ -83,6 +97,21 @@ class Recipe
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="recipe")
+     * @ORM\JoinTable(name="recipe_has_category",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $category;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="Ingredient", inversedBy="recipe")
      * @ORM\JoinTable(name="recipe_has_ingredient",
      *   joinColumns={
@@ -100,6 +129,7 @@ class Recipe
      */
     public function __construct()
     {
+        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ingredient = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

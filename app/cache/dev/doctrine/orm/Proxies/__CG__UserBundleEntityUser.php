@@ -298,4 +298,59 @@ class User extends \UserBundle\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         return parent::getUpdatedAt();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function setCreatedAtValue()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreatedAtValue', array());
+
+        return parent::setCreatedAtValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdateAtValue()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdateAtValue', array());
+
+        return parent::setUpdateAtValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoles()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRoles', array());
+
+        return parent::getRoles();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSalt()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSalt', array());
+
+        return parent::getSalt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function eraseCredentials()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'eraseCredentials', array());
+
+        return parent::eraseCredentials();
+    }
+
 }

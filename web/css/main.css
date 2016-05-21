@@ -1,0 +1,45 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.navbar {
+   padding: 15px;
+}
+
+#logotype {
+   color: #444;
+   display: inline-block;
+   font-family: "Impact";
+   font-size: 35px;
+   font-variant: small-caps;
+   margin: 0 15px;
+}
+
+#logotype img {
+   height: 45px;
+   margin-right: 4px;
+   margin-top: -5px;
+}
+
+.list-style-none {
+   list-style: none;
+}
+
+.mv-label {
+   font-weight: bold;
+   min-width: 120px;
+   display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+

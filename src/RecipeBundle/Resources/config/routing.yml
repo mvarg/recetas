@@ -1,8 +1,29 @@
 recipe_list:
-    path:     /receta
+    path:     /recipe
     defaults: { _controller: RecipeBundle:Recipe:getAll }
 
+recipe_add:
+    path:      /recipe/add
+    defaults:  {  _controller: RecipeBundle:Recipe:add }
 
-recipe_detail:
-    path:      /receta/{slug}
+recipe_mod:
+    path:      /recipe/mod/{id}
+    defaults:  {  _controller: RecipeBundle:Recipe:mod }
+    requirements:
+        id: \d+
+
+recipe_del:
+    path:      /recipe/del/{id}
+    defaults:  {  _controller: RecipeBundle:Recipe:del }
+    requirements:
+        id: \d+
+
+recipe_get:
+    path:      /recipe/{id}
+    defaults:  {  _controller: RecipeBundle:Recipe:getById }
+    requirements:
+        id: \d+
+
+recipe_get_slug:
+    path:      /recipe-slug/{slug}
     defaults:  {  _controller: RecipeBundle:Recipe:getBySlug }

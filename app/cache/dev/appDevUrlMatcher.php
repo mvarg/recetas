@@ -105,30 +105,82 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // user_login
-        if ($pathinfo === '/login') {
-            return array (  '_controller' => 'UserBundle\\Controller\\UserController::loginAction',  '_route' => 'user_login',);
+        if (0 === strpos($pathinfo, '/user')) {
+            // user_list
+            if ($pathinfo === '/user') {
+                return array (  '_controller' => 'UserBundle\\Controller\\UserController::getAllAction',  '_route' => 'user_list',);
+            }
+
+            // user_add
+            if ($pathinfo === '/user/add') {
+                return array (  '_controller' => 'UserBundle\\Controller\\UserController::addAction',  '_route' => 'user_add',);
+            }
+
+            if (0 === strpos($pathinfo, '/user/inset')) {
+                // user_insert
+                if ($pathinfo === '/user/inset') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_user_insert;
+                    }
+
+                    return array (  '_controller' => 'UserBundle\\Controller\\UserController::insertAction',  '_route' => 'user_insert',);
+                }
+                not_user_insert:
+
+                // user_insert_redirect
+                if ($pathinfo === '/user/inset') {
+                    return array (  '_controller' => 'UserBundle\\Controller\\UserController::addAction',  'path' => 'user/add',  'permanent' => true,  '_route' => 'user_insert_redirect',);
+                }
+
+            }
+
+            // user_mod
+            if (0 === strpos($pathinfo, '/user/mod') && preg_match('#^/user/mod/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_mod')), array (  '_controller' => 'UserBundle\\Controller\\UserController::modAction',));
+            }
+
+            // user_del
+            if (0 === strpos($pathinfo, '/user/del') && preg_match('#^/user/del/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_del')), array (  '_controller' => 'UserBundle\\Controller\\UserController::delAction',));
+            }
+
+            // user_get
+            if (preg_match('#^/user/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_get')), array (  '_controller' => 'UserBundle\\Controller\\UserController::getByIdAction',));
+            }
+
         }
 
-        // user_register
-        if ($pathinfo === '/register') {
-            return array (  '_controller' => 'UserBundle\\Controller\\UserController::registerAction',  '_route' => 'user_register',);
-        }
-
-        // user_contact
-        if ($pathinfo === '/contact') {
-            return array (  '_controller' => 'UserBundle\\Controller\\UserController::contactAction',  '_route' => 'user_contact',);
-        }
-
-        if (0 === strpos($pathinfo, '/receta')) {
+        if (0 === strpos($pathinfo, '/recipe')) {
             // recipe_list
-            if ($pathinfo === '/receta') {
+            if ($pathinfo === '/recipe') {
                 return array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getAllAction',  '_route' => 'recipe_list',);
             }
 
-            // recipe_detail
-            if (preg_match('#^/receta/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_detail')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getBySlugAction',));
+            // recipe_add
+            if ($pathinfo === '/recipe/add') {
+                return array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::addAction',  '_route' => 'recipe_add',);
+            }
+
+            // recipe_mod
+            if (0 === strpos($pathinfo, '/recipe/mod') && preg_match('#^/recipe/mod/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_mod')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::modAction',));
+            }
+
+            // recipe_del
+            if (0 === strpos($pathinfo, '/recipe/del') && preg_match('#^/recipe/del/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_del')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::delAction',));
+            }
+
+            // recipe_get
+            if (preg_match('#^/recipe/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_get')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getByIdAction',));
+            }
+
+            // recipe_get_slug
+            if (0 === strpos($pathinfo, '/recipe-slug') && preg_match('#^/recipe\\-slug/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_get_slug')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getBySlugAction',));
             }
 
         }
