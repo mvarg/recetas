@@ -25,6 +25,13 @@ class RecipeController extends Controller
         return new Response($recipe->getName());
     }
 
+    public function getByUserIdAction($userId)
+    {
+//        $recipes = $this->getDoctrine()->getRepository("RecipeBundle:Recipe")->findByUser($userId);
+//        return $this->render('RecipeBundle:Default:list.html.twig', ['recipes' => $recipes]);
+        return $this->render('RecipeBundle:Default:list.html.twig', ['recipes' => $this->get('recipes.by_user')->getRecipsByAuthorId($userId)]);
+    }
+
     public function getBySlugAction($slug)
     {
         $recipe = $this->getDoctrine()->getRepository("RecipeBundle:Recipe")->findOneBySlug($slug);

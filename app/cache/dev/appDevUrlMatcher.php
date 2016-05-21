@@ -150,6 +150,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_get')), array (  '_controller' => 'UserBundle\\Controller\\UserController::getByIdAction',));
             }
 
+            // recipe_get_recipes
+            if (0 === strpos($pathinfo, '/user/recipes') && preg_match('#^/user/recipes/(?P<userId>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'recipe_get_recipes')), array (  '_controller' => 'RecipeBundle\\Controller\\RecipeController::getByUserIdAction',));
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/recipe')) {

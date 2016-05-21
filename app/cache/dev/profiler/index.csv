@@ -15,3 +15,11 @@ a0f265,127.0.0.1,GET,http://recetas.moises.dev/user/inset,1463829174,9a39c0,200
 448167,127.0.0.1,POST,http://recetas.moises.dev/user/inset,1463829495,,200
 c1e826,127.0.0.1,GET,http://recetas.moises.dev/recipe,1463830615,,200
 a0bccd,127.0.0.1,GET,http://recetas.moises.dev/recipe/add,1463830623,,200
+1db4d9,127.0.0.1,GET,http://recetas.moises.dev/user/recipes/1,1463842248,7158c6,200
+7158c6,127.0.0.1,GET,http://recetas.moises.dev/user/recipes/1,1463842248,,500
+4b53a1,127.0.0.1,GET,http://recetas.moises.dev/user/recipes/1,1463842477,,200
+47cecb,127.0.0.1,GET,http://recetas.moises.dev/user/recipes/2,1463842487,,200
+e791c4,127.0.0.1,GET,http://recetas.moises.dev/user/recipes/1,1463842494,,200
+18eec5,127.0.0.1,GET,http://recetas.moises.dev/,1463842575,,200
+abcdde,127.0.0.1,GET,http://recetas.moises.dev/user/recipes/1,1463842579,,200
+c46b84,127.0.0.1,GET,http://recetas.moises.dev/user/recipes/1,1463843729,,200

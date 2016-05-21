@@ -24,6 +24,7 @@ recipe_get:
     requirements:
         id: \d+
 
+
 recipe_get_slug:
     path:      /recipe-slug/{slug}
     defaults:  {  _controller: RecipeBundle:Recipe:getBySlug }

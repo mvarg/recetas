@@ -35,3 +35,9 @@ user_get:
     defaults:  {  _controller: UserBundle:User:getById }
     requirements:
         id: \d+
+
+recipe_get_recipes:
+    path:      /user/recipes/{userId}
+    defaults:  {  _controller: RecipeBundle:Recipe:getByUserId }
+    requirements:
+        id: \d+
